@@ -1,0 +1,46 @@
+#include <Adafruit_NeoPixel.h>
+
+Adafruit_NeoPixel strip(24, 4, NEO_GRB + NEO_KHZ800);
+
+void setup() {
+  strip.begin();
+  strip.show();
+  strip.setBrightness(255);
+}
+
+int j = 0, j1 = -1, j2 = -1, ok = 0;
+
+void loop() {
+ int i;
+  for(long f_hue = 0; f_hue < 65537; f_hue += 500)
+  {  for( i = 0; i < 24 && ok; i++)
+      { 
+       if(j1 != i && j2 != i  && j2-1 != i && analogRead(A0)>10)
+          strip.setPixelColor(i, strip.gamma32(strip.ColorHSV(f_hue +i*2730, 255, 50 )));
+        if(analogRead(A0)<10 && ok)
+          { strip.setPixelColor(j, 250, 250, 250); 
+            strip.setPixelColor(j1, 20, 20, 20); 
+            strip.setPixelColor(j2, 10, 10, 10); 
+            j++;
+           j1 = j-1; j2 = j-2;
+            if(j == 24 ) { j = 0; j1 = 23; j2 = 22;}
+            if(j==1) { j1 = 0; j2 = 23;}
+        
+           }
+      }
+      strip.show();
+      delay(25); 
+
+      if(!ok)
+        for( i = 0; i < 24; i++)
+        {
+           strip.setPixelColor(i, strip.gamma32(strip.ColorHSV(f_hue +i*2730, 255, 50 )));
+           strip.show();
+           delay(50);
+           if(i == 23) ok = 1;
+         }
+       
+  }
+}    
+     
+   
