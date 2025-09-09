@@ -12,6 +12,7 @@ This project uses a 24-LED Neopixel ring and a sound sensor to create a dynamic 
 
 ## Circuit Diagram
 The circuit was designed using Tinkercad. Since the platform does not support sound sensors, a temperature sensor was used as a placeholder.
+
 ![image](https://github.com/user-attachments/assets/971a7b15-2a13-44e8-95bf-d69d412a1c94)
 
 ## Code Functionality
